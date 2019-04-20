@@ -10,3 +10,4 @@
 # VS Generted Files
 #####################
 *.VC.db
+*.ipch
