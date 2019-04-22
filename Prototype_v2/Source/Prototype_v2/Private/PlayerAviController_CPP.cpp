@@ -32,4 +32,21 @@ APlayerAvi_CPP* APlayerAviController_CPP::GetControlledPlayerAvi() const
 void APlayerAviController_CPP::AimAwayFromCamera()
 {
 	if (!GetControlledPlayerAvi()) { return; }
+
+	FVector HitLocation; // Out parameter
+	if (GetSightRayHitLocation(HitLocation))
+	{
+		//UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *HitLocation.ToString());
+		//TODO tell controlled player to aim at this point
+	}
+}
+
+bool APlayerAviController_CPP::GetSightRayHitLocation(FVector& OnHitLocation) const
+{
+	int32 ViewportSizeX, ViewportSizeY;
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
+	auto ScreenLocation = FVector2D(ViewportSizeX * AimXLocation, ViewportSizeY * AimYLocation);
+	UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *ScreenLocation.ToString());
+
+	return true;
 }

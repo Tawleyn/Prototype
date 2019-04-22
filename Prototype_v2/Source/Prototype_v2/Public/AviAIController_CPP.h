@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PlayerAvi_CPP.h"
+#include "GameFramework/Actor.h"
 #include "AIController.h"
 #include "AviAIController_CPP.generated.h"
 

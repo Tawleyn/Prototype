@@ -16,11 +16,21 @@ class PROTOTYPE_V2_API APlayerAviController_CPP : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	APlayerAvi_CPP* GetControlledPlayerAvi() const;
-	
+
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaTime) override;
 
+private:
+	APlayerAvi_CPP* GetControlledPlayerAvi() const;
+
 	void AimAwayFromCamera();
+
+	bool GetSightRayHitLocation(FVector& OnHitLocation) const;
+
+	UPROPERTY(EditAnywhere)
+	float AimXLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float AimYLocation = 0.5;
 };
