@@ -19,6 +19,8 @@ class PROTOTYPE_V2_API AAviAIController_CPP : public AAIController
 private:
 	virtual void BeginPlay() override;
 	
+	virtual void Tick(float DeltaTime) override;
+
 	APlayerAvi_CPP* GetControlledPlayerAvi() const;
 
 	APlayerAvi_CPP* GetPlayerAvi() const;

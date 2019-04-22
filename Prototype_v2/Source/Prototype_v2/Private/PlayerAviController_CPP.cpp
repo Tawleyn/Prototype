@@ -36,7 +36,7 @@ void APlayerAviController_CPP::AimAwayFromCamera()
 	FVector HitLocation; // Out parameter
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *HitLocation.ToString());
+		GetControlledPlayerAvi()->AimAt(HitLocation);
 		//TODO tell controlled player to aim at this point
 	}
 }
@@ -46,7 +46,33 @@ bool APlayerAviController_CPP::GetSightRayHitLocation(FVector& OnHitLocation) co
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
 	auto ScreenLocation = FVector2D(ViewportSizeX * AimXLocation, ViewportSizeY * AimYLocation);
-	UE_LOG(LogTemp, Warning, TEXT("ScreenLocation: %s"), *ScreenLocation.ToString());
+
+	FVector LookDirection;
+	if (GetLookDirection(ScreenLocation, LookDirection))
+	{
+		GetLookVectorHitLocation(LookDirection, OnHitLocation);
+	}
 
 	return true;
+}
+
+bool APlayerAviController_CPP::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const
+{
+	FHitResult HitResult;
+	auto StartLocation = /*PlayerCameraManager->GetCameraLocation()*/ (GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation());
+	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
+	DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor(255, 0, 0), false, -1, 0, 12.33);
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility))
+	{
+		HitLocation = HitResult.Location;
+		return true;
+	}
+	HitLocation = FVector(0);
+	return false;
+}
+
+bool APlayerAviController_CPP::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
+{
+	FVector CameraWorldLocation;
+	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, LookDirection);
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "PlayerAvi_CPP.h"
+#include "DrawDebugHelpers.h"
 #include "GameFramework/PlayerController.h"
 #include "PlayerAviController_CPP.generated.h"
 
@@ -33,4 +34,11 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	float AimYLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 2000000;
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 };

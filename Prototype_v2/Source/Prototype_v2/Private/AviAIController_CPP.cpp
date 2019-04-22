@@ -31,3 +31,18 @@ APlayerAvi_CPP* AAviAIController_CPP::GetPlayerAvi() const
 	return Cast<APlayerAvi_CPP>(PlayerPawn);
 }
 
+// Called every frame
+void AAviAIController_CPP::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerAvi())
+	{
+		// TODO Move toward the player
+
+		// Aim toward player
+		GetControlledPlayerAvi()->AimAt(GetPlayerAvi()->GetActorLocation());
+
+		// Swing if in range and ready
+	}
+}
+

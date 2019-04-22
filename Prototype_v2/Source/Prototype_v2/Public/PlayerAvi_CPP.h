@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AvatarAimingComponent.h"
 #include "GameFramework/Character.h"
 #include "PlayerAvi_CPP.generated.h"
 
@@ -11,21 +12,28 @@ class PROTOTYPE_V2_API APlayerAvi_CPP : public ACharacter
 {
 	GENERATED_BODY()
 
-public:
-	// Sets default values for this character's properties
-	APlayerAvi_CPP();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UAvatarAimingComponent* AvatarAimingComponent = nullptr;
+
 public:	
+	// Sets default values for this character's properties
+	APlayerAvi_CPP();
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetSwordReference(USkeletalMeshComponent* SwordToSet);
+
+	UPROPERTY(EditAnywhere, Category = Attributes)
+	float DamagePerHit = 10;
 	
 };
