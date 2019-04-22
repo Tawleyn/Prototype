@@ -9,5 +9,9 @@
 
 # VS Generted Files
 #####################
-*.VC.db
+*/.vs
+*.VC.db*
 *.ipch
+Prototype_v2/Content/Characters/PlayerCharacter/Weapons/T_Weapon_Set1_OcclusionRoughnessMetallic.uasset
+Prototype_v2/Content/Characters/PlayerCharacter/Weapons/T_Weapon_Set1_Normal.uasset
+Prototype_v2/Content/Characters/PlayerCharacter/Weapons/T_Weapon_Set1_BaseColor.uasset
