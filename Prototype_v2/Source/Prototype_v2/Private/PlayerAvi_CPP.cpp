@@ -38,8 +38,13 @@ void APlayerAvi_CPP::AimAt(FVector HitLocation)
 	AvatarAimingComponent->AimAt(HitLocation);
 }
 
-void APlayerAvi_CPP::SetSwordReference(USkeletalMeshComponent* SwordToSet)
+void APlayerAvi_CPP::SetAvatarReference(USkeletalMeshComponent* AvatarToSet)
 {
-	AvatarAimingComponent->SetSwordReference(SwordToSet);
+	AvatarAimingComponent->SetAvatarReference(AvatarToSet);
+}
+
+void APlayerAvi_CPP::RotateAvatar(float DegreesPerSecond)
+{
+
 }
 

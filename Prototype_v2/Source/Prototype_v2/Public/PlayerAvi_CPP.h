@@ -4,7 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "AvatarAimingComponent.h"
+#include "Engine/StaticMeshActor.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "PlayerAvi_CPP.generated.h"
 
 UCLASS()
@@ -31,9 +33,11 @@ public:
 	void AimAt(FVector HitLocation);
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetSwordReference(USkeletalMeshComponent* SwordToSet);
+
+	void SetAvatarReference(USkeletalMeshComponent* AvatarToSet);
 
 	UPROPERTY(EditAnywhere, Category = Attributes)
 	float DamagePerHit = 10;
-	
+
+	void RotateAvatar(float DegreesPerSecond);
 };

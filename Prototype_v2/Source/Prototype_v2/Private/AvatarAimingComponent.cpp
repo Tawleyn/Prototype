@@ -13,9 +13,9 @@ UAvatarAimingComponent::UAvatarAimingComponent()
 	// ...
 }
 
-void UAvatarAimingComponent::SetSwordReference(USkeletalMeshComponent* SwordToSet)
+void UAvatarAimingComponent::SetAvatarReference(USkeletalMeshComponent* AvatarToSet)
 {
-	Sword = SwordToSet;
+	Avatar = AvatarToSet;
 }
 
 // Called when the game starts
@@ -38,8 +38,22 @@ void UAvatarAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UAvatarAimingComponent::AimAt(FVector HitLocation)
 {
+	if (!Avatar) { return; }
 	auto MyAvatarName = GetOwner()->GetName();
-	auto SwordLocation = Sword->GetComponentLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *MyAvatarName, *HitLocation.ToString(), *SwordLocation);
+	auto AvatarLocation = Avatar->GetComponentLocation().ToString();
+
+	MoveAvatarToward(HitLocation);
+
+	//Start a trace from the hilt of the sword
+	auto TraceStart = Avatar->GetSocketLocation(FName("SwingSocket"));
+
+	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *MyAvatarName, *HitLocation.ToString(), *AvatarLocation);
 }
 
+void UAvatarAimingComponent::MoveAvatarToward(FVector AimDirection)
+{
+	auto AvatarRotator = Avatar->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+
+	Avatar->RotateAvatar(5); //TODO remove magic number
+}

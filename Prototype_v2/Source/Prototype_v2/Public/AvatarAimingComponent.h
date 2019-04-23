@@ -17,7 +17,7 @@ public:
 	// Sets default values for this component's properties
 	UAvatarAimingComponent();
 
-	void SetSwordReference(USkeletalMeshComponent* SwordToSet);
+	void SetAvatarReference(USkeletalMeshComponent* AvatarToSet);
 
 	void AimAt(FVector HitLocation);
 
@@ -29,8 +29,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-
 	
 private:
-	USkeletalMeshComponent* Sword = nullptr;
+	USkeletalMeshComponent* Avatar = nullptr;
+	void MoveAvatarToward(FVector AimDirection);
 };
