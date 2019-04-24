@@ -54,6 +54,4 @@ void UAvatarAimingComponent::MoveAvatarToward(FVector AimDirection)
 {
 	auto AvatarRotator = Avatar->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
-
-	Avatar->RotateAvatar(5); //TODO remove magic number
 }
